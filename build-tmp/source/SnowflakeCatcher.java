@@ -1,7 +1,23 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class SnowflakeCatcher extends PApplet {
+
 SnowFlake snowFall [];
 
 
-void setup()
+public void setup()
 {
   //your code here
   size(500, 500);
@@ -13,7 +29,7 @@ void setup()
   fill(0);
   rect(0, 400, 400, 400);
 }
-void draw()
+public void draw()
 {
 
   //your code here
@@ -26,16 +42,16 @@ void draw()
   }
 
 }
-void mouseDragged()
+public void mouseDragged()
 {
   //your code here
   if (mouseButton == LEFT) {
     noStroke();
     fill(255, 0, 0);
-    ellipse(mouseX - 20, mouseY - 20, 10, 10);
+    ellipse(mouseX, mouseY, 10, 10);
   } else  if (mouseButton == RIGHT) {
     fill(0);
-    ellipse(mouseX - 20, mouseY - 20, 45, 45);
+    ellipse(mouseX + 100, mouseY + 100, 45, 45);
   } else if (mouseButton == CENTER){
     background(0);
     for (int i = 0; i < snowFall.length; i ++) {
@@ -44,7 +60,7 @@ void mouseDragged()
   }
   }
 }
-void mouseClicked() 
+public void mouseClicked() 
 {
   if (mouseButton == CENTER) {
     background(0);
@@ -67,13 +83,13 @@ class SnowFlake
     myY = (int)(Math.random()*height) - 10;
     isMoving = true;
   }
-  void show()
+  public void show()
   {
     //your code here
     fill(255);
     ellipse(myX, myY, 5, 5);
   }
-  void lookDown()
+  public void lookDown()
   {
     //your code here
     //if (myY > 0 && myY < height) {
@@ -84,20 +100,20 @@ class SnowFlake
       }
     //}
   }
-  void erase()
+  public void erase()
   {
     //your code here
     fill(0);
     ellipse(myX, myY, 8, 8);
   }
-  void move()
+  public void move()
   {
     //your code here
     if (isMoving) {
       myY ++;
     }
   }
-  void wrap()
+  public void wrap()
   {
     //your code here
     if (myY == height - 6) {
@@ -108,3 +124,12 @@ class SnowFlake
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "SnowflakeCatcher" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
